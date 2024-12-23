@@ -1,18 +1,20 @@
 #pragma once
 #include <GLFW/glfw3.h>
 
-//must normalise grid coordinates, same as opengl, -1 to 1
-//constantly update mousepos
+
 //take mouse inputs, hold leftclick to draw, hold right click to erase
 //scroll to change brush size
 //keyboard inputs for shortcuts, etc saving, loading, opening color picker
 
+
+//class for user inputs
 class userInputs
 {
 public:
-	void cursorPos(GLFWwindow* window, int windowWidth, int windowHeight);
-	void mouseInput(GLFWwindow* window, int button, int action);
-	void keyboardInput();
-	void scrollInput();
+	static void CursorPosCallback(GLFWwindow* window, double xMousePos, double yMousePos); //cursor position callback
+	static void mouseInputCallback(GLFWwindow* window, int button, int action, int modsMouse); //mouse input callback
+	static void keyInputCallback(GLFWwindow* window, int key, int scancode, int action, int modsKey); //keyboard input callback
+	void handleScroll(GLFWwindow* window, double yScrollOffset); //handle scroll input, done this way due to scroll function not working with static functions
+	static void scrollCallback(GLFWwindow* window, double xScrollOffset, double yScrollOffset); //scroll callback
 };
 

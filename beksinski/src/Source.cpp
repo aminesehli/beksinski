@@ -31,9 +31,8 @@ int main()
 
 	std::cout << "GLFW initialized successfully!" << std::endl;
 
-	unsigned int windowWidth = 720;
-	unsigned int windowHeight = 720;
-
+	unsigned int windowWidth = 650 * 2;
+	unsigned int windowHeight = 650 * 2;
 
 	window = glfwCreateWindow(windowWidth, windowHeight, "Beksinski", NULL, NULL);
 	if (!window)
@@ -54,12 +53,19 @@ int main()
 	std::cout << "GLEW initialized successfully!" << std::endl;
 	std::cout << "OpenGL Version: " << glGetString(GL_VERSION) << std::endl;
 
+	glfwSetWindowUserPointer(window, &inputs);
+	glfwSetCursorPosCallback(window, inputs.CursorPosCallback);
+	glfwSetMouseButtonCallback(window, inputs.mouseInputCallback);
+	glfwSetKeyCallback(window, inputs.keyInputCallback);
+	glfwSetScrollCallback(window, userInputs::scrollCallback);
+
+
 	while (!glfwWindowShouldClose(window))
 	{
 		glClear(GL_COLOR_BUFFER_BIT);
 		//////////////////////////
 
-		inputs.cursorPos(window, windowWidth, windowHeight);
+		//inputs.cursorPos(window, windowWidth, windowHeight);
 
 		//////////////////////////
 		glfwSwapBuffers(window);
