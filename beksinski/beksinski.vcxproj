@@ -104,7 +104,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>C:\Users\sehli\Documents\Visual Studio 2022\libraries\glew-2.1.0-win32\glew-2.1.0\include;C:\Users\sehli\Documents\Visual Studio 2022\libraries\glfw-3.4.bin.WIN64\include;D:\vis studio stuff\beksinski\beksinski\res;D:\vis studio stuff\beksinski\beksinski\lib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\sehli\Documents\Visual Studio 2022\libraries\glew-2.1.0-win32\glew-2.1.0\include;C:\Users\sehli\Documents\Visual Studio 2022\libraries\glfw-3.4.bin.WIN64\include;D:\dev\vis studio projects\beksinski\beksinski\lib;D:\dev\vis studio projects\beksinski\beksinski\res;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -121,7 +121,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>C:\Users\sehli\Documents\Visual Studio 2022\libraries\glew-2.1.0-win32\glew-2.1.0\include;C:\Users\sehli\Documents\Visual Studio 2022\libraries\glfw-3.4.bin.WIN64\include;D:\vis studio stuff\beksinski\beksinski\res;D:\vis studio stuff\beksinski\beksinski\lib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\sehli\Documents\Visual Studio 2022\libraries\glew-2.1.0-win32\glew-2.1.0\include;C:\Users\sehli\Documents\Visual Studio 2022\libraries\glfw-3.4.bin.WIN64\include;D:\dev\vis studio projects\beksinski\beksinski\lib;D:\dev\vis studio projects\beksinski\beksinski\res;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -133,6 +133,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\indexBuffer.cpp" />
+    <ClCompile Include="src\brushes.cpp" />
     <ClCompile Include="lib\imgui\imgui.cpp" />
     <ClCompile Include="lib\imgui\imgui_demo.cpp" />
     <ClCompile Include="lib\imgui\imgui_draw.cpp" />
@@ -140,10 +142,15 @@
     <ClCompile Include="lib\imgui\imgui_impl_opengl3.cpp" />
     <ClCompile Include="lib\imgui\imgui_tables.cpp" />
     <ClCompile Include="lib\imgui\imgui_widgets.cpp" />
-    <ClCompile Include="src\Source.cpp" />
+    <ClCompile Include="src\renderer.cpp" />
+    <ClCompile Include="src\source.cpp" />
     <ClCompile Include="src\userInputs.cpp" />
+    <ClCompile Include="src\vertexBuffer.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\indexBuffer.h" />
+    <ClInclude Include="src\shaders.h" />
+    <ClInclude Include="src\brushes.h" />
     <ClInclude Include="lib\imgui\imconfig.h" />
     <ClInclude Include="lib\imgui\imgui.h" />
     <ClInclude Include="lib\imgui\imgui_impl_glfw.h" />
@@ -154,7 +161,13 @@
     <ClInclude Include="lib\imgui\imstb_textedit.h" />
     <ClInclude Include="lib\imgui\imstb_truetype.h" />
     <ClInclude Include="lib\stb\stb_image_write.h" />
+    <ClInclude Include="src\renderer.h" />
     <ClInclude Include="src\userInputs.h" />
+    <ClInclude Include="src\vertexBuffer.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="res\shaders\basicFragment.shader" />
+    <None Include="res\shaders\basicVertex.shader" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

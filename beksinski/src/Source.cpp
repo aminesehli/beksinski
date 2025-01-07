@@ -12,18 +12,23 @@
 
 #include <Windows.h>
 #include "userInputs.h"
+#include "renderer.h"
+#include "vertexBuffer.h"
+#include "indexBuffer.h"
+#include "brushes.h"
 
 #include <iostream>
+#include <math.h>
 #include <vector>
 
 //make class for user inputs
 //make function for window resizing
 //implement imgui - change color, brush size, make reset button, save button, load button, eraser
 
-
 int main()
 {
 	userInputs inputs;
+	brushes brush;
 	GLFWwindow* window;
 
 	if (!glfwInit())
@@ -31,8 +36,8 @@ int main()
 
 	std::cout << "GLFW initialized successfully!" << std::endl;
 
-	unsigned int windowWidth = 650 * 2;
-	unsigned int windowHeight = 650 * 2;
+	unsigned int windowWidth = 1300;
+	unsigned int windowHeight = 1300;
 
 	window = glfwCreateWindow(windowWidth, windowHeight, "Beksinski", NULL, NULL);
 	if (!window)
@@ -53,19 +58,25 @@ int main()
 	std::cout << "GLEW initialized successfully!" << std::endl;
 	std::cout << "OpenGL Version: " << glGetString(GL_VERSION) << std::endl;
 
-	glfwSetWindowUserPointer(window, &inputs);
-	glfwSetCursorPosCallback(window, inputs.CursorPosCallback);
-	glfwSetMouseButtonCallback(window, inputs.mouseInputCallback);
-	glfwSetKeyCallback(window, inputs.keyInputCallback);
-	glfwSetScrollCallback(window, userInputs::scrollCallback);
-
+	//callbacks
+	inputs.WindowCallbacks(window);
 
 	while (!glfwWindowShouldClose(window))
 	{
 		glClear(GL_COLOR_BUFFER_BIT);
 		//////////////////////////
+		double xpos, ypos;
+		glfwGetCursorPos(window, &xpos, &ypos);
 
-		//inputs.cursorPos(window, windowWidth, windowHeight);
+		int width, height;
+		glfwGetFramebufferSize(window, &width, &height);
+
+		float radius = 0.1f;
+		int segments = 100;
+		float x = (2.0 * (xpos / width)) - 1.0;
+		float y = 1.0 - (2.0 * (ypos / height));
+
+		brush.drawCircle(x, y, radius, segments);
 
 		//////////////////////////
 		glfwSwapBuffers(window);

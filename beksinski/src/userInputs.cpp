@@ -2,12 +2,14 @@
 #include <GLFW/glfw3.h>
 #include <iostream>
 
-void userInputs::CursorPosCallback(GLFWwindow* window, double xMousePos, double yMousePos)
+double xMousePos;
+double yMousePos;
+
+void userInputs::cursorPosCallback(GLFWwindow* window, double xMousePos, double yMousePos)
 {
 	int windowWidth, windowHeight;
-	glfwGetWindowSize(window, &windowWidth, &windowHeight);
-
 	double normalX, normalY;
+	glfwGetWindowSize(window, &windowWidth, &windowHeight);
 	normalX = (2.0 * (xMousePos / windowWidth)) - 1.0;
 	normalY = 1.0 - (2.0 * (yMousePos / windowHeight));
 	std::cout << "Mouse Position: (" << normalX << ", " << normalY << ")" << std::endl;
@@ -38,17 +40,15 @@ void userInputs::mouseInputCallback(GLFWwindow* window, int button, int action, 
 
 void userInputs::keyInputCallback(GLFWwindow* window, int key, int scancode, int action, int mods)
 {
-	//example to test callback for shortcuts, EDIT THIS LATER!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-	if (key == GLFW_KEY_E && action == GLFW_PRESS)
+	if (action == GLFW_PRESS) // Only trigger on key press
 	{
-		std::cout << "E key pressed!" << std::endl;
+		std::cout << "Key pressed (GLFW code): " << key << std::endl;
 	}
-	else if (key == GLFW_KEY_E && action == GLFW_RELEASE)
+	else if (action == GLFW_RELEASE) // Only trigger on key release
 	{
-		std::cout << "E key released!" << std::endl;
+		std::cout << "Key released (GLFW code): " << key << std::endl;
 	}
 }
-
 
 void userInputs::handleScroll(GLFWwindow* window, double yScrollOffset)
 {
@@ -66,4 +66,13 @@ void userInputs::scrollCallback(GLFWwindow* window, double xScrollOffset, double
 	if (instance) {
 		instance->handleScroll(window, yScrollOffset);
 	}
+}
+
+
+void userInputs::WindowCallbacks(GLFWwindow* window)
+{
+	glfwSetCursorPosCallback(window, cursorPosCallback);
+	glfwSetMouseButtonCallback(window, mouseInputCallback);
+	glfwSetKeyCallback(window, keyInputCallback);
+	glfwSetScrollCallback(window, scrollCallback);
 }
